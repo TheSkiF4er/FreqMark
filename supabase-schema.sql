@@ -1,4 +1,4 @@
--- FPV table sync schema for Supabase
+-- FreqMarks table sync schema for Supabase
 -- Default password: fpv58
 -- SHA-256(fpv58): c415fa767c6a3edc746874be3aa962663421a7db9ed7f1823b07349e72cd90de
 
