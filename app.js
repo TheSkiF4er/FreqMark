@@ -3,7 +3,7 @@ import { APP_CONFIG } from './config.js';
 
 const DEFAULT_COLOR = normalizeHex(APP_CONFIG.defaultColor) || '#D32F2F';
 const SESSION_KEY = 'fpv-table-password-hash';
-const APP_TITLE = String(APP_CONFIG.appTitle || 'FPV 5.8 GHz Table').trim() || 'FPV 5.8 GHz Table';
+const APP_TITLE = String(APP_CONFIG.appTitle || 'Частотные отметки').trim() || 'Частотные отметки';
 
 const BANDS = [
   { key: 'A', label: 'Band - A', channels: [5865, 5845, 5825, 5805, 5785, 5765, 5745, 5725] },
