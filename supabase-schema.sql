@@ -1,8 +1,8 @@
 -- FreqMarks table sync schema for Supabase
 -- Default admin key: fpv58
 -- SHA-256(fpv58): c415fa767c6a3edc746874be3aa962663421a7db9ed7f1823b07349e72cd90de
--- Default user key: fpv58-view
--- SHA-256(fpv58-view): abb7c56cc8ed32665f024679d7d18dcb76bde32c580c2396be3a0465b007ab8d
+-- Default user key: fpv29
+-- SHA-256(fpv29): 61b411756a573838426d57b115cf17c08971590118e77da039749604ff035c84
 
 create extension if not exists pgcrypto;
 
@@ -23,7 +23,7 @@ values (
   1,
   'c415fa767c6a3edc746874be3aa962663421a7db9ed7f1823b07349e72cd90de',
   'c415fa767c6a3edc746874be3aa962663421a7db9ed7f1823b07349e72cd90de',
-  'abb7c56cc8ed32665f024679d7d18dcb76bde32c580c2396be3a0465b007ab8d'
+  '61b411756a573838426d57b115cf17c08971590118e77da039749604ff035c84'
 )
 on conflict (id) do nothing;
 
@@ -31,7 +31,7 @@ update public.page_access
 set
   password_hash = coalesce(password_hash, admin_key_hash, 'c415fa767c6a3edc746874be3aa962663421a7db9ed7f1823b07349e72cd90de'),
   admin_key_hash = coalesce(admin_key_hash, password_hash, 'c415fa767c6a3edc746874be3aa962663421a7db9ed7f1823b07349e72cd90de'),
-  viewer_key_hash = coalesce(viewer_key_hash, 'abb7c56cc8ed32665f024679d7d18dcb76bde32c580c2396be3a0465b007ab8d')
+  viewer_key_hash = coalesce(viewer_key_hash, '61b411756a573838426d57b115cf17c08971590118e77da039749604ff035c84')
 where id = 1;
 
 alter table public.page_access alter column admin_key_hash set not null;
