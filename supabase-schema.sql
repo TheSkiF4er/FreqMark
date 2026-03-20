@@ -1,10 +1,10 @@
+create extension if not exists pgcrypto with schema extensions;
+
 -- FreqMarks table sync schema for Supabase
 -- Default admin key: fpv58
 -- SHA-256(fpv58): c415fa767c6a3edc746874be3aa962663421a7db9ed7f1823b07349e72cd90de
 -- Default user key: fpv29
 -- SHA-256(fpv29): 61b411756a573838426d57b115cf17c08971590118e77da039749604ff035c84
-
-create extension if not exists pgcrypto;
 
 create table if not exists public.page_access (
   id integer primary key default 1 check (id = 1),
@@ -126,7 +126,7 @@ declare
   attempt_hash text;
   matched_role text;
 begin
-  attempt_hash := encode(digest(coalesce(attempt_key, ''), 'sha256'), 'hex');
+  attempt_hash := encode(extensions.digest(coalesce(attempt_key, '')::text, 'sha256'::text), 'hex'::text);
 
   select case
     when attempt_hash = admin_key_hash then 'admin'
@@ -152,7 +152,7 @@ as $$
     select 1
     from public.page_access
     where id = 1
-      and admin_key_hash = encode(digest(coalesce(public.get_request_header('x-freqmarks-access-key'), ''), 'sha256'), 'hex')
+      and admin_key_hash = encode(extensions.digest(coalesce(public.get_request_header('x-freqmarks-access-key'), '')::text, 'sha256'::text), 'hex'::text)
   );
 $$;
 
